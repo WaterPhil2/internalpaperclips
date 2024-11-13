@@ -1,40 +1,28 @@
 import React from 'react';
-import { AuthProvider } from './context/AuthContext';
+import { Paperclip, Factory, TrendingUp, Coins, Brain } from 'lucide-react';
 import { GameProvider } from './context/GameContext';
-import { Auth } from './components/Auth';
-import { Game } from './components/Game';
-import { useAuthState } from './hooks/useAuthState';
-import { LoadingSpinner } from './components/LoadingSpinner';
-import { Youtube } from 'lucide-react';
+import Header from './components/Header';
+import Resources from './components/Resources';
+import Manufacturing from './components/Manufacturing';
+import Marketing from './components/Marketing';
+import ComputationalResources from './components/ComputationalResources';
 
-function AppContent() {
-  const { user, loading } = useAuthState();
-
-  if (loading) return <LoadingSpinner />;
-  if (!user) return <Auth />;
-
+function App() {
   return (
     <GameProvider>
-      <Game userId={user.uid} />
-      <footer className="fixed bottom-0 w-full bg-gray-900 p-4 text-center">
-        <a
-          href="https://www.youtube.com/@phillenomade"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center text-gray-400 hover:text-white transition-colors"
-        >
-          <Youtube className="w-5 h-5 mr-2" />
-          Follow me on YouTube
-        </a>
-      </footer>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100">
+        <div className="container mx-auto px-4 py-8">
+          <Header />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <Resources />
+            <Manufacturing />
+            <Marketing />
+            <ComputationalResources />
+          </div>
+        </div>
+      </div>
     </GameProvider>
   );
 }
 
-export default function App() {
-  return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
-  );
-}
+export default App;
